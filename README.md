@@ -173,7 +173,7 @@ Resolved the lockout the way a Tier-1 technician would: checked "Unlock account"
 
 ## Notes
 
-- Screenshots showing an earlier, corrected attempt (an initial password policy configured on the Sales-linked GPO, and a first lockout test that ran into a disabled account rather than a true lockout) were left out of this walkthrough in favor of the final, working sequence above, to keep the write-up focused on the correct method.
+
 - All lab data (IP ranges, domain name, usernames) is fictional and scoped to an isolated VirtualBox network — nothing here touches a real production environment.
 <!--
  ```diff
