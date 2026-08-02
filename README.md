@@ -22,8 +22,6 @@ This project simulates a small company's IT environment to practice core Tier-1 
 
 ## Program Walk-through
 
-Screenshots are referenced by their uploaded filename so you can match them exactly when assembling the GitHub post.
-
 ### 1. Isolated lab network
 **Screenshot: `Screenshot_1.png`**
 
