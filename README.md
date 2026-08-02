@@ -26,70 +26,106 @@ Screenshots are referenced by their uploaded filename so you can match them exac
 
 ### 1. Isolated lab network
 **Screenshot: `Screenshot_1.png`**
+
+![Host-only network](screenshots/Screenshot_1.png)
 Created a Host-only Network in VirtualBox (`VirtualBox Host-Only Ethernet Adapter #2`, subnet `192.168.50.0/24`) to isolate the lab from the home network while still allowing the Domain Controller and client to communicate.
 
 ### 2. Installing Windows Server 2022
 **Screenshot: `Screenshot_2_3.png`**
+
+![Windows Server install](screenshots/Screenshot_2_3.png)
 Selected Windows Server 2022 Standard Evaluation (Desktop Experience) for the Domain Controller build.
 
 ### 3. Installing the Active Directory Domain Services role
 **Screenshot: `Screenshot_3_1.png`**
+
+![AD DS role install](screenshots/Screenshot_3_1.png)
 Installed AD DS along with Group Policy Management and Remote Server Administration Tools (RSAT) via Server Manager's Add Roles and Features wizard.
 
 ### 4. Promoting the server to a Domain Controller
 **Screenshot: `Screenshot_4_0.png`**
+
+![Promote to DC wizard](screenshots/Screenshot_4_0.png)
 Configured a new forest with root domain `corp.local` using the Active Directory Domain Services Configuration Wizard.
 
 ### 5. Domain Controller promotion confirmed
 **Screenshot: `Screenshot_5_0.png`**
+
+![Domain login proof](screenshots/Screenshot_5_0.png)
 Logged in as `CORP\Administrator` following the DC promotion and reboot — proof the domain is live.
 
 ### 6. Organizational Unit structure
 **Screenshot: `Screenshot_6_0.png`**
+
+![OU structure](screenshots/Screenshot_6_0.png)
 Created OUs mirroring a small company's departments: IT, Sales, and HR.
 
 ### 7. Creating test user accounts
 **Screenshot: `Screenshot_7_0.png`**
+
+![New user wizard](screenshots/Screenshot_7_0.png)
 Created individual test users inside each OU using the New Object - User wizard (e.g., Test User1 in Sales).
 
 ### 8. Multiple users per department
 **Screenshot: `Screenshot_8_0.png`**
+
+![Users in Sales OU](screenshots/Screenshot_8_0.png)
 Sales OU populated with three test users (Test User1, Test User2, Test User3).
 
 ### 9. Security group with members
 **Screenshot: `Screenshot_9_0.png`**
+
+![Security group members](screenshots/Screenshot_9_0.png)
 Created the `Sales-Team` security group and added the department's users as members.
 
 ### 10. Help desk task: password reset
 **Screenshot: `Screenshot_10_0.png`**
+
+![Reset password](screenshots/Screenshot_10_0.png)
 Performed a standard password reset via ADUC's Reset Password function.
 
 ### 11. Help desk task: account lockout status (baseline)
 **Screenshot: `Screenshot_11_0.png`**
+
+![Lockout baseline](screenshots/Screenshot_11_0.png)
 Reviewed the Account tab's lockout status field prior to any lockout event, as a baseline for later comparison.
 
 ### 12. Help desk task: disabling a departed employee's account
 **Screenshot: `Screenshot_12_0.png`**
+
+![Disabled account](screenshots/Screenshot_12_0.png)
 Disabled Test User3's account to simulate offboarding — note the account icon change in the OU listing.
 
 ### 13. Help desk task: moving a user between OUs
 **Screenshot: `Screenshot_13_0.png`**
+
+![Moved user between OUs](screenshots/Screenshot_13_0.png)
 Moved Test User1 from the Sales OU to the IT OU to simulate an internal department transfer.
 
 ### 14. Domain-joining the client machine
 **Screenshot: `Screenshot_14_0.png`**
+
+![Domain join proof](screenshots/Screenshot_14_0.png)
 Confirmed the Windows 11 client successfully joined `corp.local` via System Properties (Computer Name/Domain Changes).
 
 ### 15. Logging in as a domain user
 **Screenshot: `Screenshot_15_0.png`**
+
+![Domain user login](screenshots/Screenshot_15_0.png)
 Logged into the domain-joined client as a `CORP\` domain account rather than a local account, confirming end-to-end domain authentication.
 
 ### 16. Department-specific Group Policy Object
 **Screenshot: `Screenshot_16_0.png`**
+
+![Sales-linked GPO](screenshots/Screenshot_16_0.png)
 Created and linked `Sales-Desktop-Policy`, a GPO scoped to the Sales OU, to demonstrate a department-specific setting (as opposed to a domain-wide security policy — see next section).
 
 ### 17. Domain-wide Password & Account Lockout Policy
 **Screenshots: `Screenshot_20_0.png` (Password Policy) and `Screenshot_21_0.png` (Account Lockout Policy)**
+
+![Default Domain Policy - Password Policy](screenshots/Screenshot_20_0.png)
+
+![Default Domain Policy - Account Lockout Policy](screenshots/Screenshot_21_0.png)
 Configured Account Policies directly in **Default Domain Policy** — the correct location, since Password/Lockout Policy only takes effect domain-wide when linked at the domain root, not on an OU-linked GPO. Settings were chosen to align with current **NIST SP 800-63B Revision 4** guidance (finalized July 2025) rather than Windows' legacy defaults:
 
 | Setting | Value | Why |
@@ -107,22 +143,32 @@ Configured Account Policies directly in **Default Domain Policy** — the correc
 
 ### 18. Applying the policy to the client
 **Screenshot: `Screenshot_18_0.png`**
+
+![gpupdate force](screenshots/Screenshot_18_0.png)
 Ran `gpupdate /force` on the domain-joined client to pull the updated Group Policy.
 
 ### 19. Confirming the policy at the domain level
 **Screenshot: `Screenshot_22_0.png`**
+
+![net accounts confirmation](screenshots/Screenshot_22_0.png)
 Ran `net accounts` on the Domain Controller to confirm the effective domain-wide policy matches configuration — minimum password length 14, lockout threshold 5, lockout duration 15 minutes, all correctly enforced.
 
 ### 20. Triggering a real account lockout
 **Screenshot: `Screenshot_23_0.png`**
+
+![Lockout triggered](screenshots/Screenshot_23_0.png)
 Deliberately entered an incorrect password 5+ times for an enabled test account, triggering AD's lockout threshold. The login screen returned: *"The referenced account is currently locked out and may not be logged on to."*
 
 ### 21. Confirming the lockout in Active Directory
 **Screenshot: `Screenshot_24_0.png`**
+
+![Lockout confirmed in AD](screenshots/Screenshot_24_0.png)
 Verified the lockout server-side — the Account tab explicitly states the account is currently locked out on the Domain Controller.
 
 ### 22. Resolving the lockout
 **Screenshot: `Screenshot_25_0.png`**
+
+![Lockout resolved](screenshots/Screenshot_25_0.png)
 Resolved the lockout the way a Tier-1 technician would: checked "Unlock account" and applied the change. Confirmed the user could log in again with the correct password.
 
 ---
