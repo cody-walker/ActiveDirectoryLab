@@ -175,6 +175,7 @@ Resolved the lockout the way a Tier-1 technician would: checked "Unlock account"
 
 
 - All lab data (IP ranges, domain name, usernames) is fictional and scoped to an isolated VirtualBox network — nothing here touches a real production environment.
+- This lab is extended in [osTicket Helpdesk Lab](https://github.com/cody-walker/osTicket-Helpdesk-Lab) to demonstrate a full ticket-to-resolution workflow, using these same test user accounts.
 <!--
  ```diff
 - text in red
